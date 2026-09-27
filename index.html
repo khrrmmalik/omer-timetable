@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omer's Timetable</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    .date-box {
+      text-align: center;
+      padding: 18px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .schedule {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10px 20px 40px;
+    }
+
+    .activity {
+      display: flex;
+      align-items: center;
+      background: white;
+      margin: 12px 0;
+      padding: 18px 22px;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      transition: 0.2s;
+    }
+
+    .activity.current {
+      background: #dcfce7;
+      border: 4px solid #22c55e;
+      transform: scale(1.02);
+    }
+
+    .activity.done {
+      opacity: 0.55;
+    }
+
+    .time {
+      width: 190px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details h2 {
+      margin: 0 0 5px;
+      font-size: 26px;
+    }
+
+    .details p {
+      margin: 0;
+      font-size: 18px;
+      color: #6b7280;
+    }
+
+    .status {
+      min-width: 120px;
+      text-align: right;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .current .status {
+      color: #16a34a;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 25px;
+      font-size: 18px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 700px) {
+      header h1 {
+        font-size: 32px;
+      }
+
+      .activity {
+        padding: 15px;
+      }
+
+      .time {
+        width: 125px;
+        font-size: 17px;
+      }
+
+      .details h2 {
+        font-size: 21px;
+      }
+
+      .details p {
+        font-size: 15px;
+      }
+
+      .status {
+        min-width: 70px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>📚 Omer's Daily Timetable</h1>
+    <p>Learn • Practice • Play • Grow</p>
+  </header>
+
+  <div class="date-box" id="date"></div>
+
+  <main class="schedule">
+
+    <div class="activity" data-start="07:00" data-end="07:30">
+      <div class="time">7:00 – 7:30</div>
+      <div class="details">
+        <h2>🌅 Wake Up & Get Ready</h2>
+        <p>Brush, wash, get dressed and prepare for the day.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="07:30" data-end="08:00">
+      <div class="time">7:30 – 8:00</div>
+      <div class="details">
+        <h2>🍳 Breakfast</h2>
+        <p>Have breakfast and get ready for learning.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="08:00" data-end="09:00">
+      <div class="time">8:00 – 9:00</div>
+      <div class="details">
+        <h2>📖 Study Time</h2>
+        <p>School subjects, reading and written practice.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="09:00" data-end="10:00">
+      <div class="time">9:00 – 10:00</div>
+      <div class="details">
+        <h2>💻 Computer & Coding</h2>
+        <p>HTML, Scratch, Code.org or another coding activity.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="10:00" data-end="10:30">
+      <div class="time">10:00 – 10:30</div>
+      <div class="details">
+        <h2>☕ Break</h2>
+        <p>Relax, have a snack and take a break from studying.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="10:30" data-end="11:30">
+      <div class="time">10:30 – 11:30</div>
+      <div class="details">
+        <h2>🧠 Learning & Projects</h2>
+        <p>Practical projects, experiments and problem solving.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="11:30" data-end="12:30">
+      <div class="time">11:30 – 12:30</div>
+      <div class="details">
+        <h2>⚽ Play & Exercise</h2>
+        <p>Outdoor play, cycling, walking or physical activity.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="12:30" data-end="13:30">
+      <div class="time">12:30 – 1:30</div>
+      <div class="details">
+        <h2>🍽️ Lunch & Rest</h2>
+        <p>Lunch and quiet rest.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="13:30" data-end="14:30">
+      <div class="time">1:30 – 2:30</div>
+      <div class="details">
+        <h2>📚 Independent Learning</h2>
+        <p>Reading, revision or completing a project.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity quran" data-start="14:30" data-end="15:30">
+      <div class="time">2:30 – 3:30</div>
+      <div class="details">
+        <h2>🕌 Quran</h2>
+        <p>Quran learning and practice — except Sunday.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="15:30" data-end="17:00">
+      <div class="time">3:30 – 5:00</div>
+      <div class="details">
+        <h2>🎮 Free Time</h2>
+        <p>Play, hobbies, friends or limited screen time.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="17:00" data-end="18:00">
+      <div class="time">5:00 – 6:00</div>
+      <div class="details">
+        <h2>🚲 Outdoor Play</h2>
+        <p>Get outside and stay active.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="18:00" data-end="19:00">
+      <div class="time">6:00 – 7:00</div>
+      <div class="details">
+        <h2>📖 Revision</h2>
+        <p>Review what was learned during the day.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="19:00" data-end="20:00">
+      <div class="time">7:00 – 8:00</div>
+      <div class="details">
+        <h2>🍽️ Dinner & Family Time</h2>
+        <p>Dinner and time with family.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="20:00" data-end="21:00">
+      <div class="time">8:00 – 9:00</div>
+      <div class="details">
+        <h2>🌙 Relax & Prepare for Bed</h2>
+        <p>Quiet time, prepare for tomorrow and get ready to sleep.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+  </main>
+
+  <div class="footer">
+    Omer — Learn something every day 🚀
+  </div>
+
+  <script>
+    function updateTimetable() {
+
+      const now = new Date();
+
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const currentMinutes = hours * 60 + minutes;
+
+      const day = now.getDay();
+
+      const dateText = now.toLocaleDateString("en-PK", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      document.getElementById("date").textContent = dateText;
+
+      const activities = document.querySelectorAll(".activity");
+
+      activities.forEach(activity => {
+
+        activity.classList.remove("current");
+        activity.classList.remove("done");
+
+        const start = activity.dataset.start.split(":");
+        const end = activity.dataset.end.split(":");
+
+        const startMinutes =
+          parseInt(start[0]) * 60 + parseInt(start[1]);
+
+        const endMinutes =
+          parseInt(end[0]) * 60 + parseInt(end[1]);
+
+        const status = activity.querySelector(".status");
+
+        // Sunday = no Quran
+        if (activity.classList.contains("quran") && day === 0) {
+          activity.style.display = "none";
+          return;
+        } else {
+          activity.style.display = "flex";
+        }
+
+        if (
+          currentMinutes >= startMinutes &&
+          currentMinutes < endMinutes
+        ) {
+          activity.classList.add("current");
+          status.textContent = "▶ NOW";
+        }
+
+        else if (currentMinutes >= endMinutes) {
+          activity.classList.add("done");
+          status.textContent = "✓ Done";
+        }
+
+        else {
+          status.textContent = "";
+        }
+
+      });
+    }
+
+    updateTimetable();
+
+    // Update every minute
+    setInterval(updateTimetable, 60000);
+  </script>
+
+</body>
+</html>
