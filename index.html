@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,7 +191,7 @@
       <div class="time">10:00 – 10:30</div>
       <div class="details">
         <h2>☕ Break</h2>
-        <p>Relax, have a snack and take a break from studying.</p>
+        <p>Relax, have a snack and take a break.</p>
       </div>
       <div class="status"></div>
     </div>
@@ -216,8 +217,8 @@
     <div class="activity" data-start="12:30" data-end="13:30">
       <div class="time">12:30 – 1:30</div>
       <div class="details">
-        <h2>🍽️ Lunch & Rest</h2>
-        <p>Lunch and quiet rest.</p>
+        <h2>🧘 Rest & Personal Time</h2>
+        <p>Relax and prepare for the afternoon routine.</p>
       </div>
       <div class="status"></div>
     </div>
@@ -225,8 +226,8 @@
     <div class="activity" data-start="13:30" data-end="14:30">
       <div class="time">1:30 – 2:30</div>
       <div class="details">
-        <h2>📚 Independent Learning</h2>
-        <p>Reading, revision or completing a project.</p>
+        <h2>🍽️ Lunch Break</h2>
+        <p>Lunch and a short rest.</p>
       </div>
       <div class="status"></div>
     </div>
@@ -234,8 +235,8 @@
     <div class="activity quran" data-start="14:30" data-end="15:30">
       <div class="time">2:30 – 3:30</div>
       <div class="details">
-        <h2>🕌 Quran</h2>
-        <p>Quran learning and practice — except Sunday.</p>
+        <h2>🕌 Quran with Qari Sahab</h2>
+        <p>Quran lesson and learning.</p>
       </div>
       <div class="status"></div>
     </div>
@@ -243,44 +244,53 @@
     <div class="activity" data-start="15:30" data-end="17:00">
       <div class="time">3:30 – 5:00</div>
       <div class="details">
-        <h2>🎮 Free Time</h2>
-        <p>Play, hobbies, friends or limited screen time.</p>
+        <h2>📺 TV Time</h2>
+        <p>TV time after completing the Quran lesson with Qari Sahab.</p>
       </div>
       <div class="status"></div>
     </div>
 
-    <div class="activity" data-start="17:00" data-end="18:00">
-      <div class="time">5:00 – 6:00</div>
+    <div class="activity" data-start="17:00" data-end="19:00">
+      <div class="time">5:00 – 7:00</div>
       <div class="details">
-        <h2>🚲 Outdoor Play</h2>
-        <p>Get outside and stay active.</p>
+        <h2>🕌 Namaz & Quran Revision</h2>
+        <p>Namaz and revision of the Quran lesson until Maghrib.</p>
       </div>
       <div class="status"></div>
     </div>
 
-    <div class="activity" data-start="18:00" data-end="19:00">
-      <div class="time">6:00 – 7:00</div>
+    <div class="activity" data-start="19:00" data-end="20:30">
+      <div class="time">7:00 – 8:30</div>
       <div class="details">
-        <h2>📖 Revision</h2>
-        <p>Review what was learned during the day.</p>
+        <h2>🚲 Outdoor Activity & Cycling</h2>
+        <p>Get outside, cycle and stay active after Maghrib.</p>
       </div>
       <div class="status"></div>
     </div>
 
-    <div class="activity" data-start="19:00" data-end="20:00">
-      <div class="time">7:00 – 8:00</div>
+    <div class="activity" data-start="20:30" data-end="21:30">
+      <div class="time">8:30 – 9:30</div>
       <div class="details">
-        <h2>🍽️ Dinner & Family Time</h2>
-        <p>Dinner and time with family.</p>
+        <h2>🍽️ Dinner & Relaxation</h2>
+        <p>Dinner and relaxing family time.</p>
       </div>
       <div class="status"></div>
     </div>
 
-    <div class="activity" data-start="20:00" data-end="21:00">
-      <div class="time">8:00 – 9:00</div>
+    <div class="activity" data-start="21:30" data-end="22:30">
+      <div class="time">9:30 – 10:30</div>
       <div class="details">
-        <h2>🌙 Relax & Prepare for Bed</h2>
-        <p>Quiet time, prepare for tomorrow and get ready to sleep.</p>
+        <h2>📱 Mobile Use Time</h2>
+        <p>Enjoy your allowed mobile time.</p>
+      </div>
+      <div class="status"></div>
+    </div>
+
+    <div class="activity" data-start="22:30" data-end="23:59">
+      <div class="time">10:30 PM</div>
+      <div class="details">
+        <h2>🌙 Sleep Time</h2>
+        <p>Time to sleep and get ready for tomorrow.</p>
       </div>
       <div class="status"></div>
     </div>
@@ -293,14 +303,10 @@
 
   <script>
     function updateTimetable() {
-
       const now = new Date();
 
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const currentMinutes = hours * 60 + minutes;
-
-      const day = now.getDay();
+      const currentMinutes =
+        now.getHours() * 60 + now.getMinutes();
 
       const dateText = now.toLocaleDateString("en-PK", {
         weekday: "long",
@@ -311,9 +317,7 @@
 
       document.getElementById("date").textContent = dateText;
 
-      const activities = document.querySelectorAll(".activity");
-
-      activities.forEach(activity => {
+      document.querySelectorAll(".activity").forEach(activity => {
 
         activity.classList.remove("current");
         activity.classList.remove("done");
@@ -328,14 +332,6 @@
           parseInt(end[0]) * 60 + parseInt(end[1]);
 
         const status = activity.querySelector(".status");
-
-        // Sunday = no Quran
-        if (activity.classList.contains("quran") && day === 0) {
-          activity.style.display = "none";
-          return;
-        } else {
-          activity.style.display = "flex";
-        }
 
         if (
           currentMinutes >= startMinutes &&
@@ -353,15 +349,15 @@
         else {
           status.textContent = "";
         }
-
       });
     }
 
     updateTimetable();
 
-    // Update every minute
+    // Update the highlighted activity every minute
     setInterval(updateTimetable, 60000);
   </script>
 
 </body>
 </html>
+```
